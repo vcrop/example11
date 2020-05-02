@@ -5,5 +5,8 @@ import ru.vcrop.example10.graph.Vertex;
 import java.util.stream.Stream;
 
 public interface Walk<T> {
-    Stream<Vertex<T>> walk(Vertex<T> from, VertexVisitor<? super T> visitor);
+    default Stream<Vertex<T>> walk(Vertex<T> from) {
+        return walk(from, v -> VertexVisitorResult.CONTINUE);
+    }
+    Stream<Vertex<T>> walk(Vertex<T> from, VertexVisitor<T> visitor);
 }

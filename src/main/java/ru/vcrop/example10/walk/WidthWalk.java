@@ -9,7 +9,7 @@ import java.util.stream.Stream;
 
 public class WidthWalk<T> implements Walk<T> {
     @Override
-    public Stream<Vertex<T>> walk(Vertex<T> from, VertexVisitor<? super T> visitor) {
+    public Stream<Vertex<T>> walk(Vertex<T> from, VertexVisitor<T> visitor) {
         Set<Vertex<T>> result = new LinkedHashSet<>();
         Set<Vertex<T>> current = Set.of(from);
         while (!current.isEmpty()) {

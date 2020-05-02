@@ -8,10 +8,10 @@ import java.util.stream.Stream;
 
 public class DepthWalk<T> implements Walk<T> {
 
-    VertexVisitor<? super T> visitor;
+    VertexVisitor<T> visitor;
 
     @Override
-    public Stream<Vertex<T>> walk(Vertex<T> from, VertexVisitor<? super T> visitor) {
+    public Stream<Vertex<T>> walk(Vertex<T> from, VertexVisitor<T> visitor) {
         this.visitor = visitor;
         Set<Vertex<T>> result = new LinkedHashSet<>();
         walkImpl(from, result);

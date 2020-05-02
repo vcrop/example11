@@ -27,7 +27,7 @@ public class Main {
 
         for (Walk<Integer> w : List.of(new DepthWalk<Integer>(), new WidthWalk<Integer>())) {
             System.out.println(w);
-            w.walk(from, VertexVisitor.fullVisit).forEach(System.out::println);
+            w.walk(from).forEach(System.out::println);
         }
 
     }
