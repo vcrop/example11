@@ -6,6 +6,7 @@ import ru.vcrop.example10.walk.VertexVisitor;
 import ru.vcrop.example10.walk.VertexVisitorResult;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class PathImpl<T> implements Path<T> {
 
@@ -38,7 +39,7 @@ public class PathImpl<T> implements Path<T> {
     @Override
     public String toString() {
         return "PathImpl{" +
-                "list=" + vertexList +
+                vertexList.stream().map(Vertex::toString).collect(Collectors.joining(" -> ")) +
                 '}';
     }
 

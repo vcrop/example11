@@ -37,4 +37,9 @@ public class WidthWalk<T> implements Walk<T> {
         }
         return result.stream();
     }
+
+    @Override
+    public String toString() {
+        return "WidthWalk{ }";
+    }
 }
