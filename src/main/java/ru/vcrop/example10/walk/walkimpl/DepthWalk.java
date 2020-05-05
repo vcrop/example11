@@ -3,36 +3,33 @@ package ru.vcrop.example10.walk.walkimpl;
 import ru.vcrop.example10.graph.Vertex;
 import ru.vcrop.example10.paths.Path;
 import ru.vcrop.example10.walk.VertexVisitor;
-import ru.vcrop.example10.walk.VertexVisitorResult;
 import ru.vcrop.example10.walk.Walk;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Stream;
+public class DepthWalk<T,R> implements Walk<T,R> {
 
-public class DepthWalk<T> implements Walk<T> {
+    private final Path<T,?,R> path;
 
-    private final Path<T> path;
-
-    public DepthWalk(Path<T> path) {
+    public DepthWalk(Path<T,?,R> path) {
         this.path = path;
     }
 
     @Override
-    public Stream<Path<T>> walk(Vertex<T> from, VertexVisitor<T> visitor) {
-        List<Path<T>> result = new ArrayList<>();
-        walkImpl(path.push(from), visitor, result);
-        return result.stream();
+    public Path<T,?,R> walk(Vertex<T> from, VertexVisitor<T,R> visitor) {
+        return walkImpl(path.push(from), visitor);
     }
 
-    private VertexVisitorResult walkImpl(Path<T> path, VertexVisitor<T> visitor, List<Path<T>> result) {
-        if (path.onVisit(visitor) == VertexVisitorResult.CONTINUE) {
-            result.add(path);
-            for (Vertex<T> v : path.get().get(path.get().size() - 1).getEdges())
-                if (walkImpl(path.push(v), visitor, result) == VertexVisitorResult.TERMINATE)
-                    return VertexVisitorResult.TERMINATE;
+    protected Path<T,?,R> walkImpl(Path<T,?,R> path, VertexVisitor<T,R> visitor) {
+        switch (path.onVisit(visitor)) {
+            case TERMINATE:
+                return path;
+            case CONTINUE:
+                for (Vertex<T> v : path.get().get(path.get().size() - 1).getEdges()) {
+                    Path<T,?,R> p = walkImpl(path.push(v), visitor);
+                    if (p != null) return p;
+                }
+            case SKIP: return null;
         }
-        return VertexVisitorResult.CONTINUE;
+        return path;
     }
 
     @Override

@@ -11,4 +11,5 @@ public interface Graph<T> {
     }
 
     Set<Vertex<T>> vertexes(Predicate<? super Vertex<T>> predicate);
+
 }

@@ -25,6 +25,7 @@ public class MatrixGraphAdapter<T> implements Graph<T> {
 
     public Set<Vertex<T>> vertexes(Predicate<? super Vertex<T>> predicate) {
         if (Objects.isNull(vertexSet)) {
+            System.out.println("-->");
             List<Vertex<T>> vertexList = generate(factory::create).limit(matrix.length).collect(Collectors.toList());
             IntStream.range(0, matrix.length)
                     .forEach(i -> IntStream.range(0, matrix.length)
@@ -36,4 +37,10 @@ public class MatrixGraphAdapter<T> implements Graph<T> {
                 : vertexSet.stream().filter(predicate).collect(Collectors.toSet());
     }
 
+    @Override
+    public String toString() {
+        return "MatrixGraphAdapter{" +
+                "vertexSet=" + vertexSet +
+                '}';
+    }
 }
