@@ -1,4 +1,4 @@
-package ru.vcrop.example10.walk;
+package ru.vcrop.example10.walk.visitors;
 
 import ru.vcrop.example10.paths.Path;
 

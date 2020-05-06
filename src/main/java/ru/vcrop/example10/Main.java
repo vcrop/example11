@@ -1,14 +1,15 @@
 package ru.vcrop.example10;
 
-import ru.vcrop.example10.factory.ChessBoardFactory;
+import ru.vcrop.example10.factory.someExample.ChessBoardFactory;
 import ru.vcrop.example10.factory.VertexFactory;
 import ru.vcrop.example10.graph.Graph;
 import ru.vcrop.example10.graph.MatrixGraphAdapter;
 import ru.vcrop.example10.graph.Vertex;
-import ru.vcrop.example10.graph.matrixImpl.HorseTurnMatrix;
+import ru.vcrop.example10.graph.matrixImpl.someExample.HorseTurnMatrix;
 import ru.vcrop.example10.paths.pathImpl.BasePathImpl;
 import ru.vcrop.example10.walk.Walk;
-import ru.vcrop.example10.walk.walkimpl.DepthWalk;
+import ru.vcrop.example10.walk.visitors.VertexVisitors;
+import ru.vcrop.example10.walk.walkImpl.DepthWalk;
 
 public class Main {
 

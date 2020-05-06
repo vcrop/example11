@@ -2,8 +2,8 @@ package ru.vcrop.example10.paths.pathImpl;
 
 import ru.vcrop.example10.graph.Vertex;
 import ru.vcrop.example10.paths.Path;
-import ru.vcrop.example10.walk.VertexVisitor;
-import ru.vcrop.example10.walk.VertexVisitorResult;
+import ru.vcrop.example10.walk.visitors.VertexVisitor;
+import ru.vcrop.example10.walk.visitors.VertexVisitorResult;
 
 import java.util.*;
 import java.util.stream.Collector;

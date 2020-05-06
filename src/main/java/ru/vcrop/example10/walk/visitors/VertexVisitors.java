@@ -1,9 +1,7 @@
-package ru.vcrop.example10;
+package ru.vcrop.example10.walk.visitors;
 
 import ru.vcrop.example10.graph.Vertex;
 import ru.vcrop.example10.paths.Path;
-import ru.vcrop.example10.walk.VertexVisitor;
-import ru.vcrop.example10.walk.VertexVisitorResult;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -39,5 +37,5 @@ public class VertexVisitors {
                 Set.copyOf(path.get()).size() != path.get().size() ? VertexVisitorResult.SKIP : VertexVisitorResult.CONTINUE;
 
     }
-    
+
 }

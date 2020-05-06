@@ -1,8 +1,8 @@
-package ru.vcrop.example10.walk.walkimpl;
+package ru.vcrop.example10.walk.walkImpl;
 
 import ru.vcrop.example10.graph.Vertex;
 import ru.vcrop.example10.paths.Path;
-import ru.vcrop.example10.walk.VertexVisitor;
+import ru.vcrop.example10.walk.visitors.VertexVisitor;
 import ru.vcrop.example10.walk.Walk;
 
 public class DepthWalk<T,R> implements Walk<T,R> {
