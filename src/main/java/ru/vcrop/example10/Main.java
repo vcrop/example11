@@ -7,19 +7,18 @@ import ru.vcrop.example10.graph.Matrix;
 import ru.vcrop.example10.graph.MatrixGraphAdapter;
 import ru.vcrop.example10.graph.Vertex;
 import ru.vcrop.example10.graph.matrixImpl.BaseDirectionMatrix;
+import ru.vcrop.example10.paths.Path;
 import ru.vcrop.example10.paths.collectors.Collectors;
 import ru.vcrop.example10.paths.pathImpl.BasePathImpl;
-import ru.vcrop.example10.paths.pathImpl.SimplePathImpl;
+import ru.vcrop.example10.walk.SomeClass;
 import ru.vcrop.example10.walk.Walk;
-import ru.vcrop.example10.walk.visitors.VertexVisitor;
-import ru.vcrop.example10.walk.visitors.VertexVisitorResult;
 import ru.vcrop.example10.walk.visitors.VertexVisitors;
 import ru.vcrop.example10.walk.walkImpl.DepthWalk;
 
-import java.util.Arrays;
-import java.util.EnumSet;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collector;
 
+import static java.util.stream.Collectors.*;
 import static ru.vcrop.example10.graph.matrixImpl.directions.BaseDirections.*;
 
 public class Main {
@@ -54,10 +53,12 @@ public class Main {
         Vertex<Integer> from = factory.concrete(0, 0);
         Vertex<Integer> to = factory.concrete(3, 1);
 
-        Walk<Integer, Void> walk1 = new DepthWalk<>(new SimplePathImpl<>());
 
-        System.out.println(walk1.walk(from, VertexVisitors.find(to)));
+        Collector<Path<Integer>,?,List<Path<Integer>>> collector = Collectors.pathsTo(to, toList());
+        SomeClass<Integer,List<Path<Integer>>> someClass = new SomeClass<>(VertexVisitors.findFirst(to), collector);
 
+        Walk<Integer,List<Path<Integer>>> walk = new DepthWalk<>(new BasePathImpl<>(), someClass);
+        System.out.println(walk.walk(from));
 /*
         VertexFactory<String> factory = new ChessBoardFactory();
         Graph<String> graph = new MatrixGraphAdapter<>(new HorseTurnMatrix(), factory);

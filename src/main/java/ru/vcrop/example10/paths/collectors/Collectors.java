@@ -3,20 +3,46 @@ package ru.vcrop.example10.paths.collectors;
 import ru.vcrop.example10.graph.Vertex;
 import ru.vcrop.example10.paths.Path;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.function.Supplier;
+import java.util.Set;
+import java.util.function.*;
 import java.util.stream.Collector;
 
-public class Collectors {
-    public static Collector<Path<Integer, ?, Map<Vertex<Integer>, Long>>, ?, Map<Vertex<Integer>, Long>> countVisit() {
-        return
-                Collector.of((Supplier<HashMap<Vertex<Integer>, Long>>) HashMap::new,
-                        (a, b) -> a.put(b.tail(), a.getOrDefault(b.tail(), 0L) + 1L),
-                        (a, b) -> {
-                            a.putAll(b);
-                            return a;
-                        },
-                        a -> a);
+import static java.util.stream.Collector.of;
+
+public final class Collectors {
+    public static <T, A, R> Collector<Path<T>, ?, R> pathsTo(Vertex<T> vertex, Collector<Path<T>, A, R> collector) {
+        return filter(p -> p.tail() == vertex, collector);
+    }
+
+    public static <T, A, R> Collector<Path<T>, ?, R> filter(Predicate<Path<T>> predicate, Collector<Path<T>, A, R> collector) {
+        return new Collector<Path<T>, A, R>() {
+            @Override
+            public Supplier<A> supplier() {
+                return collector.supplier();
+            }
+
+            @Override
+            public BiConsumer<A, Path<T>> accumulator() {
+                return (a, p) -> {
+                    if (predicate.test(p)) collector.accumulator().accept(a, p);
+                };
+            }
+
+            @Override
+            public BinaryOperator<A> combiner() {
+                return collector.combiner();
+            }
+
+            @Override
+            public Function<A, R> finisher() {
+                return collector.finisher();
+            }
+
+            @Override
+            public Set<Characteristics> characteristics() {
+                return collector.characteristics();
+            }
+        };
+
     }
 }

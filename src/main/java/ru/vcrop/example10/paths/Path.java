@@ -6,13 +6,9 @@ import ru.vcrop.example10.walk.visitors.VertexVisitorResult;
 
 import java.util.List;
 
-public interface Path<T, A, R> {
+public interface Path<T> {
 
-    Path<T, A, R> push(Vertex<T> vertex);
-
-    VertexVisitorResult onVisit(VertexVisitor<T,R> visitor);
-
-    R getResult();
+    Path<T> push(Vertex<T> vertex);
 
     default Vertex<T> tail(){
         return get().get(get().size() - 1);
