@@ -15,7 +15,8 @@ public class DepthWalk<T,R> implements Walk<T,R> {
 
     @Override
     public Path<T,?,R> walk(Vertex<T> from, VertexVisitor<T,R> visitor) {
-        return walkImpl(path.push(from), visitor);
+        Path<T, ?, R> result = walkImpl(path.push(from), visitor);
+        return result == null ? path : result;
     }
 
     protected Path<T,?,R> walkImpl(Path<T,?,R> path, VertexVisitor<T,R> visitor) {
@@ -27,7 +28,8 @@ public class DepthWalk<T,R> implements Walk<T,R> {
                     Path<T,?,R> p = walkImpl(path.push(v), visitor);
                     if (p != null) return p;
                 }
-            case SKIP: return null;
+            case SKIP:
+                return null;
         }
         return path;
     }

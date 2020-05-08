@@ -18,14 +18,14 @@ public class MatrixGraphAdapter<T> implements Graph<T> {
     VertexFactory<T> factory;
     Set<Vertex<T>> vertexSet;
 
-    public MatrixGraphAdapter(int[][] matrix, VertexFactory<T> factory) {
-        this.matrix = matrix;
+    public MatrixGraphAdapter(Matrix matrix, VertexFactory<T> factory) {
+        this.matrix = matrix.get();
         this.factory = factory;
+        this.vertexSet = vertexes();
     }
 
-    public Set<Vertex<T>> vertexes(Predicate<? super Vertex<T>> predicate) {
+    public Set<Vertex<T>> vertexes() {
         if (Objects.isNull(vertexSet)) {
-            System.out.println("-->");
             List<Vertex<T>> vertexList = generate(factory::create).limit(matrix.length).collect(Collectors.toList());
             IntStream.range(0, matrix.length)
                     .forEach(i -> IntStream.range(0, matrix.length)
@@ -33,8 +33,7 @@ public class MatrixGraphAdapter<T> implements Graph<T> {
                             .forEach(j -> vertexList.get(i).addEdge(vertexList.get(j))));
             vertexSet = Set.copyOf(vertexList);
         }
-        return predicate == Graph.ALL_VERTEX ? vertexSet
-                : vertexSet.stream().filter(predicate).collect(Collectors.toSet());
+        return vertexSet;
     }
 
     @Override

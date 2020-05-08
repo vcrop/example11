@@ -12,24 +12,21 @@ import java.util.stream.Collectors;
 public class BasePathImpl<T, A, R> implements Path<T, A, R> {
 
     private final List<Vertex<T>> vertexList;
-    private A value;
-    private final Collector<T, A, R> collector;
+    private final A value;
+    private final Collector<Path<T, ?, R>, A, R> collector;
 
-    private BasePathImpl(Path<T, A, R> path, A v, Collector<T, A, R> collector, Vertex<T> vertex) {
+    private BasePathImpl(Path<T, A, R> path, A v, Collector<Path<T, ?, R>, A, R>  collector, Vertex<T> vertex) {
         this.collector = collector;
+        this.value = v;
         this.vertexList = new ArrayList<>(path.get());
         this.vertexList.add(vertex);
-        if (collector != null) collector.accumulator().accept(v, vertex.getValue());
+        collector.accumulator().accept(v, this);
     }
 
-    public BasePathImpl(Collector<T, A, R> collector) {
+    public BasePathImpl(Collector<Path<T, ?, R>, A, R>  collector) {
         this.collector = collector;
-        if (collector != null) value = collector.supplier().get();
+        value = collector.supplier().get();
         vertexList = new ArrayList<>();
-    }
-
-    public BasePathImpl() {
-        this(null);
     }
 
     @Override
@@ -44,7 +41,6 @@ public class BasePathImpl<T, A, R> implements Path<T, A, R> {
 
     @Override
     public R getResult() {
-        if (collector == null) throw new UnsupportedOperationException();
         return collector.finisher().apply(value);
     }
 

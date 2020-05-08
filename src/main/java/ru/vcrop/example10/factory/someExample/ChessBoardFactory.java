@@ -3,7 +3,7 @@ package ru.vcrop.example10.factory.someExample;
 import ru.vcrop.example10.factory.VertexFactory;
 import ru.vcrop.example10.graph.Vertex;
 
-public class ChessBoardFactory implements VertexFactory<String> {
+public class ChessBoardFactory implements VertexFactory<String>{
     private int i = 0;
 
     @Override

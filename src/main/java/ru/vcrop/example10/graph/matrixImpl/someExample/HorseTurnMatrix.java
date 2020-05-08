@@ -1,6 +1,8 @@
 package ru.vcrop.example10.graph.matrixImpl.someExample;
 
-public class HorseTurnMatrix {
+import ru.vcrop.example10.graph.Matrix;
+
+public class HorseTurnMatrix implements Matrix {
 
     public int[][] get() {
         int[][] direction = {{-2, -1}, {-2, 1}, {-1, -2}, {-1, 2}, {1, -2}, {1, 2}, {2, -1}, {2, 1}};

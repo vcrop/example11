@@ -14,6 +14,10 @@ public interface Path<T, A, R> {
 
     R getResult();
 
+    default Vertex<T> tail(){
+        return get().get(get().size() - 1);
+    }
+
     List<Vertex<T>> get();
 
 }

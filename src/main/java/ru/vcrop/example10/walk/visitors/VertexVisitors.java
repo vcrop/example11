@@ -12,9 +12,9 @@ public class VertexVisitors {
             final Set<Vertex<T>> visited = new HashSet<>();
             @Override
             public VertexVisitorResult onVisit(Path<T,?,R> path) {
-                if (visited.contains(path.get().get(path.get().size() - 1)))
+                if (visited.contains(path.tail()))
                     return VertexVisitorResult.SKIP;
-                visited.add(path.get().get(path.get().size() - 1));
+                visited.add(path.tail());
                 return VertexVisitorResult.CONTINUE;
             }
         };
@@ -22,7 +22,7 @@ public class VertexVisitors {
 
     public static <T,R> VertexVisitor<T,R> find(Vertex<T> vertex) {
         return ((VertexVisitor<T,R>) (path ->
-                path.get().get(path.get().size() - 1) == vertex ? VertexVisitorResult.TERMINATE : VertexVisitorResult.CONTINUE))
+                path.tail() == vertex ? VertexVisitorResult.TERMINATE : VertexVisitorResult.CONTINUE))
                 .and(VertexVisitors.doNotCross());
 
     }
