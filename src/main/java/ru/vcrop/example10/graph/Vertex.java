@@ -28,4 +28,5 @@ public class Vertex<T> {
     public String toString() {
         return "Vertex{" + "value=" + value + '}';
     }
+
 }

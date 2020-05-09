@@ -8,11 +8,11 @@ import ru.vcrop.example10.graph.MatrixGraphAdapter;
 import ru.vcrop.example10.graph.Vertex;
 import ru.vcrop.example10.graph.matrixImpl.BaseDirectionMatrix;
 import ru.vcrop.example10.paths.Path;
-import ru.vcrop.example10.paths.collectors.Collectors;
-import ru.vcrop.example10.paths.pathImpl.BasePathImpl;
-import ru.vcrop.example10.walk.SomeClass;
+import ru.vcrop.example10.collectors.Collectors;
+import ru.vcrop.example10.paths.pathImpl.ReducedPathImpl;
+import ru.vcrop.example10.walk.BehaviorClass;
 import ru.vcrop.example10.walk.Walk;
-import ru.vcrop.example10.walk.visitors.VertexVisitors;
+import ru.vcrop.example10.walk.visitors.PathVisitors;
 import ru.vcrop.example10.walk.walkImpl.DepthWalk;
 
 import java.util.*;
@@ -41,23 +41,25 @@ public class Main {
                 {0, 0, 1, 0, 1, 0}
         };
     */
-        Matrix matrix1 = new BaseDirectionMatrix(4, 2, EnumSet.of(UP, RIGHT));
-        System.out.println(Arrays.deepToString(matrix1.get()));
+        Matrix matrix1 = new BaseDirectionMatrix(5, 2, EnumSet.of(UP, RIGHT, LEFT, DOWN));
+
         Integer[][] m = {
-                {1, 2, 3, 4},
-                {5, 6, 7, 8},
+                {1, 2, 3, 4, 5},
+                {6, 7, 8, 9, 10},
         };
         VertexFactory<Integer> factory = new BaseFactoryMatrixImpl<>(m);
         Graph<Integer> graph = new MatrixGraphAdapter<>(matrix1, factory);
 
         Vertex<Integer> from = factory.concrete(0, 0);
-        Vertex<Integer> to = factory.concrete(3, 1);
+        Vertex<Integer> to = factory.concrete(4, 1);
 
 
         Collector<Path<Integer>,?,List<Path<Integer>>> collector = Collectors.pathsTo(to, toList());
-        SomeClass<Integer,List<Path<Integer>>> someClass = new SomeClass<>(VertexVisitors.findFirst(to), collector);
+        BehaviorClass<Integer,List<Path<Integer>>> behaviorClass = new BehaviorClass<>(PathVisitors.noCross(), collector);
 
-        Walk<Integer,List<Path<Integer>>> walk = new DepthWalk<>(new BasePathImpl<>(), someClass);
+        Path<Integer> path = new ReducedPathImpl<>(() -> 0, Integer::sum);
+
+        Walk<Integer,List<Path<Integer>>> walk = new DepthWalk<>(path, behaviorClass);
         System.out.println(walk.walk(from));
 /*
         VertexFactory<String> factory = new ChessBoardFactory();

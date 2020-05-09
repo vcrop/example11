@@ -1,5 +1,5 @@
 package ru.vcrop.example10.walk.visitors;
 
-public enum VertexVisitorResult {
+public enum PathVisitorResult {
     CONTINUE, TERMINATE, SKIP
 }

@@ -10,7 +10,7 @@ public class BasePathImpl<T> implements Path<T> {
 
     private final List<Vertex<T>> vertexList;
 
-    private BasePathImpl(Path<T> path, Vertex<T> vertex) {
+    protected BasePathImpl(Path<T> path, Vertex<T> vertex) {
         this.vertexList = new ArrayList<>(path.get());
         this.vertexList.add(vertex);
     }
@@ -30,8 +30,23 @@ public class BasePathImpl<T> implements Path<T> {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        BasePathImpl<?> basePath = (BasePathImpl<?>) o;
+
+        return vertexList != null ? vertexList.equals(basePath.vertexList) : basePath.vertexList == null;
+    }
+
+    @Override
+    public int hashCode() {
+        return vertexList != null ? vertexList.hashCode() : 0;
+    }
+
+    @Override
     public String toString() {
-        return "PathImpl{" +
+        return "BasePathImpl{" +
                 vertexList.stream().map(Vertex::toString).collect(Collectors.joining(" -> ")) +
                 '}';
     }

@@ -1,4 +1,4 @@
-package ru.vcrop.example10.paths.collectors;
+package ru.vcrop.example10.collectors;
 
 import ru.vcrop.example10.graph.Vertex;
 import ru.vcrop.example10.paths.Path;
@@ -6,8 +6,6 @@ import ru.vcrop.example10.paths.Path;
 import java.util.Set;
 import java.util.function.*;
 import java.util.stream.Collector;
-
-import static java.util.stream.Collector.of;
 
 public final class Collectors {
     public static <T, A, R> Collector<Path<T>, ?, R> pathsTo(Vertex<T> vertex, Collector<Path<T>, A, R> collector) {

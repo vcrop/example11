@@ -1,23 +1,24 @@
 package ru.vcrop.example10.walk;
 
 import ru.vcrop.example10.paths.Path;
-import ru.vcrop.example10.walk.visitors.VertexVisitor;
-import ru.vcrop.example10.walk.visitors.VertexVisitorResult;
+import ru.vcrop.example10.walk.visitors.PathVisitor;
+import ru.vcrop.example10.walk.visitors.PathVisitorResult;
 
 import java.util.stream.Collector;
 
-public class SomeClass<T, R> {
+public class BehaviorClass<T, R> {
 
-    private final VertexVisitor<T> visitor;
+    private final PathVisitor<T> visitor;
     private final CollectorImpl<Path<T>, ?, R> collectorImpl;
 
-    public SomeClass(VertexVisitor<T> visitor, Collector<Path<T>, ?, R> collector) {
+    public BehaviorClass(PathVisitor<T> visitor, Collector<Path<T>, ?, R> collector) {
         this.visitor = visitor;
         this.collectorImpl = new CollectorImpl<>(collector);
     }
 
-    public VertexVisitorResult visit(Path<T> path) {
-        collectorImpl.accumulate(path);
+    public PathVisitorResult visit(Path<T> path) {
+        PathVisitorResult pathVisitorResult = visitor.onVisit(path);
+        if (pathVisitorResult != PathVisitorResult.SKIP) collectorImpl.accumulate(path);
         return visitor.onVisit(path);
     }
 
