@@ -1,4 +1,4 @@
-package ru.vcrop.example10.collectors;
+package ru.vcrop.example10.util;
 
 import ru.vcrop.example10.graph.Vertex;
 import ru.vcrop.example10.paths.Path;

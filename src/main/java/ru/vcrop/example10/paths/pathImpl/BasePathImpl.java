@@ -25,6 +25,11 @@ public class BasePathImpl<T> implements Path<T> {
     }
 
     @Override
+    public T reduce() {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
     public List<Vertex<T>> get() {
         return vertexList;
     }

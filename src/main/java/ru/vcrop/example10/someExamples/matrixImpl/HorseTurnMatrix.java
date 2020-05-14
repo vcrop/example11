@@ -1,4 +1,4 @@
-package ru.vcrop.example10.graph.matrixImpl.someExample;
+package ru.vcrop.example10.someExamples.matrixImpl;
 
 import ru.vcrop.example10.graph.Matrix;
 

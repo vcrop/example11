@@ -1,17 +1,17 @@
 package ru.vcrop.example10.graph.matrixImpl;
 
 import ru.vcrop.example10.graph.Matrix;
-import ru.vcrop.example10.graph.matrixImpl.directions.BaseDirections;
+import ru.vcrop.example10.util.BaseDirections;
 
 import java.util.EnumSet;
 
-public class BaseDirectionMatrix implements Matrix {
+public class ArrayMatrix implements Matrix {
 
     private final int[][] array;
     private final int width, height;
     private final EnumSet<BaseDirections> directions;
 
-    public BaseDirectionMatrix(int width, int height, EnumSet<BaseDirections> directions) {
+    public ArrayMatrix(int width, int height, EnumSet<BaseDirections> directions) {
         this.width = width;
         this.height = height;
         this.directions = directions;

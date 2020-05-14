@@ -1,4 +1,4 @@
-package ru.vcrop.example10.factory.someExample;
+package ru.vcrop.example10.factory.factoryImpl;
 
 import ru.vcrop.example10.factory.VertexFactory;
 import ru.vcrop.example10.graph.Vertex;

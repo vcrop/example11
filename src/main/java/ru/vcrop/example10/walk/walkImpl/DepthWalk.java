@@ -2,6 +2,7 @@ package ru.vcrop.example10.walk.walkImpl;
 
 import ru.vcrop.example10.graph.Vertex;
 import ru.vcrop.example10.paths.Path;
+import ru.vcrop.example10.walk.Behavior;
 import ru.vcrop.example10.walk.BehaviorClass;
 import ru.vcrop.example10.walk.Walk;
 import ru.vcrop.example10.walk.visitors.PathVisitorResult;
@@ -9,9 +10,9 @@ import ru.vcrop.example10.walk.visitors.PathVisitorResult;
 public class DepthWalk<T, R> implements Walk<T, R> {
 
     private final Path<T> path;
-    private final BehaviorClass<T, R> behaviorClass;
+    private final Behavior<T, R> behaviorClass;
 
-    public DepthWalk(Path<T> path, BehaviorClass<T, R> behaviorClass) {
+    public DepthWalk(Path<T> path, Behavior<T, R> behaviorClass) {
         this.path = path;
         this.behaviorClass = behaviorClass;
     }

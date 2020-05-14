@@ -1,6 +1,8 @@
-package ru.vcrop.example10.walk.visitors;
+package ru.vcrop.example10.util;
 
 import ru.vcrop.example10.graph.Vertex;
+import ru.vcrop.example10.walk.visitors.PathVisitor;
+import ru.vcrop.example10.walk.visitors.PathVisitorResult;
 
 import java.util.Set;
 

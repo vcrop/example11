@@ -12,9 +12,7 @@ public interface Path<T> {
         return get().get(get().size() - 1);
     }
 
-    default T reduce() {
-        throw new UnsupportedOperationException();
-    }
+    T reduce();
 
     List<Vertex<T>> get();
 

@@ -6,7 +6,7 @@ import ru.vcrop.example10.walk.visitors.PathVisitorResult;
 
 import java.util.stream.Collector;
 
-public class BehaviorClass<T, R> {
+public class BehaviorClass<T, R> implements Behavior<T, R>{
 
     private final PathVisitor<T> visitor;
     private final CollectorImpl<Path<T>, ?, R> collectorImpl;

@@ -28,7 +28,12 @@ public class ReducedPathImpl<T> extends BasePathImpl<T>{
         return new ReducedPathImpl<>(this, vertex, reducer, reducer.apply(result, vertex.getValue()));
     }
 
-    public T getResult() {
+    public BinaryOperator<T> getReducer() {
+        return reducer;
+    }
+
+    @Override
+    public T reduce() {
         return result;
     }
 
